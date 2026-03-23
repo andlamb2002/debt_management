@@ -6,9 +6,9 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
+            "database": "backend_development",
             "username": "postgres",
-            "name": "backend_rrp",
-            "database": "Debt_Management"
+            "name": "debt_management"
         }
     ]
 }
