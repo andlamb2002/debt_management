@@ -4,5 +4,6 @@ class Debt < ApplicationRecord
 
     validates :name, presence: true
     validates :principal_amt, presence: true
+    validates :issue_date, presence: true
     validates :status, inclusion: { in: [true, false] }
 end

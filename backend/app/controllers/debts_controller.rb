@@ -46,6 +46,6 @@ class DebtsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def debt_params
-      params.expect(debt: [ :name, :principal_amt, :status, :organization_id ])
+      params.expect(debt: [ :name, :principal_amt, :issue_date, :status, :organization_id ])
     end
 end
