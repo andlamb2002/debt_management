@@ -10,13 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_23_223038) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_24_060530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "debts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.bigint "organization_id", null: false
+    t.decimal "principal_amt", precision: 10, scale: 2
+    t.boolean "status"
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_debts_on_organization_id"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
   end
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.bigint "debt_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["debt_id"], name: "index_payments_on_debt_id"
+  end
+
+  add_foreign_key "debts", "organizations"
+  add_foreign_key "payments", "debts"
 end
