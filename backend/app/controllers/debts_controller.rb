@@ -10,7 +10,10 @@ class DebtsController < ApplicationController
 
   # GET /debts/1
   def show
-    render json: @debt
+    render json: @debt.as_json.merge(
+      total_paid: @debt.total_paid,
+      remaining_balance: @debt.remaining_balance
+    )
   end
 
   # POST /debts
