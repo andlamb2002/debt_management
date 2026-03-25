@@ -19,7 +19,7 @@ class DebtsController < ApplicationController
   # POST /debts
   def create
     @debt = Debt.new(debt_params)
-    @debt.status = "active";
+    @debt.status = "active"
 
     if @debt.save
       render json: @debt, status: :created, location: @debt
