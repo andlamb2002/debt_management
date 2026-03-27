@@ -1,19 +1,20 @@
-import { Box, Button, Card, Container, Typography } from '@mui/material'
+import { Container } from '@mui/material'
 import './App.css'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import DebtList from './pages/DebtList'
+import DebtDetails from './pages/DebtDetails'
+import AddDebt from './pages/AddDebt'
 
 function App() {
 
     return (
         <Container>
-            <Box sx={{display: 'flex'}}>
-                <Typography variant='h3'>Organization</Typography>
-                <Button>Add</Button>
-            </Box>
-            <Box>
-                <Card>Name Amt_Left Date Status</Card>
-                <Card>Name Amt_Left Date Status</Card>
-                <Card>Name Amt_Left Date Status</Card>
-            </Box>
+            <Routes>
+                <Route path="/" element={<DebtList></DebtList>}></Route>
+                <Route path="/debt/:id" element={<DebtDetails></DebtDetails>}></Route>
+                <Route path="/debt/add" element={<AddDebt></AddDebt>}></Route>
+                <Route path="*" element={<Navigate to="/" />}></Route>
+            </Routes>
         </Container>
     )
 }
