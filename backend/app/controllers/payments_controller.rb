@@ -6,7 +6,6 @@ class PaymentsController < ApplicationController
     if params[:debt_id]
       debt = Debt.find(params[:debt_id])
       @payments = debt.payments
-    end
     else
       @payments = Payment.all
     end

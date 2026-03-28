@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  resources :organizations do
+    resources :debts, only: [:index]
+  end
+
+  resources :debts do
+    resources :payments, only: [:index]
+  end
+
   resources :payments
-  resources :debts
-  resources :organizations
+  # resources :debts
+  # resources :organizations
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
