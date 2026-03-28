@@ -3,7 +3,13 @@ class DebtsController < ApplicationController
 
   # GET /debts
   def index
-    @debts = Debt.all
+    if params[:organization_id]
+      organization = Organization.find(params[:organization_id])
+      @debts = organization.debts
+    end
+    else
+      @debts = Debt.all
+    end
 
     render json: @debts
   end

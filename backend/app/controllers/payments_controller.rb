@@ -3,7 +3,13 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   def index
-    @payments = Payment.all
+    if params[:debt_id]
+      debt = Debt.find(params[:debt_id])
+      @payments = debt.payments
+    end
+    else
+      @payments = Payment.all
+    end
 
     render json: @payments
   end
