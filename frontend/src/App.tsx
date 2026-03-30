@@ -7,19 +7,7 @@ import AddDebt from './pages/AddDebt'
 import { useEffect, useState } from 'react'
 import { getOrganizations } from './api/organizations'
 
-type Debt = {
-    id: number,
-    name: string,
-    principal_amt: number,
-    status: "active" | "paid",
-    issue_date: string
-}
-
-type Organization = {
-    id: number,
-    name: string,
-    debts: Debt[],
-}
+import type { Organization } from './types/types'
 
 function App() {
 
@@ -39,21 +27,10 @@ function App() {
 
     return (
         <Container>
-            <ul>
-                {organizations.map(o => (
-                    <>
-                        <li key={o.id}> {o.name} </li><ul>
-                            {o.debts.map(d => (
-                                <li key={d.id}>{d.name}</li>
-                            ))}
-                        </ul>
-                    </>
-                ))}
-            </ul>
             <Routes>
-                <Route path="/" element={<DebtList></DebtList>}></Route>
-                <Route path="/debt/:id" element={<DebtDetails></DebtDetails>}></Route>
-                <Route path="/debt/add" element={<AddDebt></AddDebt>}></Route>
+                <Route path="/" element={<DebtList organizations={organizations}/>}></Route>
+                <Route path="/debt/:id" element={<DebtDetails />}></Route>
+                <Route path="/debt/add" element={<AddDebt />}></Route>
                 <Route path="*" element={<Navigate to="/" />}></Route>
             </Routes>
         </Container>

@@ -1,7 +1,13 @@
 import { Card, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-function DebtCard() {
+import type { Debt } from '../types/types'
+
+type Props = {
+    debt: Debt
+}
+
+function DebtCard({ debt }: Props) {
 
     const navigate = useNavigate();
 
@@ -14,10 +20,10 @@ function DebtCard() {
             sx={{display: "flex", p: 2, gap: 2, cursor: "pointer"}}
             onClick={debtDetails}
         >
-            <Typography variant='h6'> Name </Typography>
-            <Typography variant='h6'> Amt_Left </Typography>
-            <Typography variant='h6'> Date </Typography>
-            <Typography variant='h6'> Status </Typography>
+            <Typography variant='h6'> {debt.name} </Typography>
+            <Typography variant='h6'> {debt.principal_amt} </Typography>
+            <Typography variant='h6'> {debt.issue_date} </Typography>
+            <Typography variant='h6'> {debt.status} </Typography>
         </Card>
     )
 }
