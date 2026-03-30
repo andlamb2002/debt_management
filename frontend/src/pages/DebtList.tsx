@@ -33,7 +33,7 @@ function DebtList() {
             <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, pb: 4}}>
                 {organizations.map(o => (
                     <Box key={o.id}>
-                        <Box sx={{display: 'flex', gap: 2}}>
+                        <Box sx={{display: 'flex', gap: 2, pb: 2}}>
                             <Typography variant='h4'> {o.name} </Typography>
                             <Button onClick={addDebt}>Add</Button>
                         </Box>
