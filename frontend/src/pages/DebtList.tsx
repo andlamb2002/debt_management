@@ -1,14 +1,26 @@
+import { useState, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material'
 import DebtCard from '../components/DebtCard'
 import { useNavigate } from 'react-router-dom'
 
 import type { Organization } from '../types/types'
+import { getOrganizations } from '../api/organizations'
 
-type Props = {
-    organizations: Organization[]
-}
+function DebtList() {
 
-function DebtList({ organizations }: Props) {
+    const [organizations, setOrganizations] = useState<Organization[]>([]);
+    
+        useEffect(() => {
+            const fetchOrganizations = async () => {
+                try {
+                    const data = await getOrganizations();
+                    setOrganizations(data);
+                } catch {
+                    console.log("Error");
+                }
+            }
+            fetchOrganizations();
+        }, [])
 
     const navigate = useNavigate();
 
@@ -37,7 +49,6 @@ function DebtList({ organizations }: Props) {
                 ))}
             </Box>
         </>
-        
     )
 }
 
