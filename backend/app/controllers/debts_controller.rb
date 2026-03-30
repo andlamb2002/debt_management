@@ -10,7 +10,7 @@ class DebtsController < ApplicationController
       @debts = Debt.all
     end
 
-    render json: @debts
+    render json: @debts.as_json(include: :payments)
   end
 
   # GET /debts/1

@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
   def index
     @organizations = Organization.all
 
-    render json: @organizations
+    render json: @organizations.as_json(include: :debts)
   end
 
   # GET /organizations/1
