@@ -7,9 +7,18 @@ import AddDebt from './pages/AddDebt'
 import { useEffect, useState } from 'react'
 import { getOrganizations } from './api/organizations'
 
+type Debt = {
+    id: number,
+    name: string,
+    principal_amt: number,
+    status: "active" | "paid",
+    issue_date: string
+}
+
 type Organization = {
     id: number,
     name: string,
+    debts: Debt[],
 }
 
 function App() {
@@ -32,7 +41,13 @@ function App() {
         <Container>
             <ul>
                 {organizations.map(o => (
-                    <li key={o.id}> {o.name} </li>
+                    <>
+                        <li key={o.id}> {o.name} </li><ul>
+                            {o.debts.map(d => (
+                                <li key={d.id}>{d.name}</li>
+                            ))}
+                        </ul>
+                    </>
                 ))}
             </ul>
             <Routes>
