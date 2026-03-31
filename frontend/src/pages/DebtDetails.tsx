@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 import { getDebt } from "../api/debts";
+import { addPayment } from "../api/payments";
 import { Box, Button, TextField, Typography } from "@mui/material"
 import PaymentCard from "../components/PaymentCard";
 import type { Debt, Payment } from "../types/types";
@@ -18,6 +19,11 @@ function DebtDetails() {
 
     const [debt, setDebt] = useState<DebtInfo | null>(null);
 
+    const [amount, setAmount] = useState<number>(0);
+    const [date, setDate] = useState<string>("");
+
+    const [refreshKey, setRefreshKey] = useState(0)
+
     useEffect(() => {
         const fetchDebt = async () => {
             try {
@@ -28,12 +34,20 @@ function DebtDetails() {
             }
         }
         fetchDebt();
-    }, [id])
-
-    const navigate = useNavigate();
+    }, [id, refreshKey])
     
-    const handleSubmit = () => {
-        navigate("/");
+    const handleSubmit = async () => {
+        try {
+            const payment = {
+                amount: amount,
+                date_paid: date,
+                debt_id: Number(id),
+            }
+            await addPayment(payment);
+            setRefreshKey(prev => prev + 1);
+        } catch {
+            console.log("Error adding payment.");
+        }
     }
 
     if (!debt) {
@@ -58,6 +72,7 @@ function DebtDetails() {
                 <Typography variant="h5">Payments</Typography>
                 {debt.payments.map(p => (
                     <PaymentCard
+                        key={p.id}
                         payment={p}
                     />
                 ))}
@@ -66,9 +81,13 @@ function DebtDetails() {
                 <TextField
                     label="Amt"
                     type="number"
+                    value={amount}
+                    onChange={e => setAmount(Number(e.target.value))}
                 />
                 <TextField
                     type="date"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
                 />
                 <Button onClick={handleSubmit}>Add</Button>
             </Box>
