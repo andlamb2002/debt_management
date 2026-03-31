@@ -21,7 +21,7 @@ function DebtCard({ debt }: Props) {
             onClick={debtDetails}
         >
             <Typography variant='h6'> {debt.name} </Typography>
-            <Typography variant='h6'> {debt.principal_amt} </Typography>
+            <Typography variant='h6'> {Number(debt.principal_amt).toFixed(2)} </Typography>
             <Typography variant='h6'> {debt.issue_date} </Typography>
             <Typography variant='h6'> {debt.status} </Typography>
         </Card>

@@ -90,9 +90,9 @@ function DebtDetails() {
                 <Typography variant="h6">{debt.name}</Typography>
                 <Typography variant="h6">{debt.issue_date}</Typography>
                 <Typography variant="h6">{debt.status}</Typography>
-                <Typography variant="h6">{debt.principal_amt}</Typography>
-                <Typography variant="h6">{debt.total_paid}</Typography>
-                <Typography variant="h6">{debt.remaining_balance}</Typography>
+                <Typography variant="h6">{Number(debt.principal_amt).toFixed(2)} Total</Typography>
+                <Typography variant="h6">{Number(debt.total_paid).toFixed(2)} Paid</Typography>
+                <Typography variant="h6">{Number(debt.remaining_balance).toFixed(2)} Remaining</Typography>
                 <Button
                     onClick={handleDelete}
                 >
