@@ -50,6 +50,7 @@ function AddDebt() {
                 type="number"
                 value={amount}
                 onChange={e => setAmount(Number(e.target.value))}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
             />
             <TextField
                 type="date"
