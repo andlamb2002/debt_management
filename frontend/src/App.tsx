@@ -11,7 +11,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<DebtList />}></Route>
                 <Route path="/debt/:id" element={<DebtDetails />}></Route>
-                <Route path="/debt/add" element={<AddDebt />}></Route>
+                <Route path="/debt/add/:id" element={<AddDebt />}></Route>
                 <Route path="*" element={<Navigate to="/" />}></Route>
             </Routes>
         </Container>

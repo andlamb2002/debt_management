@@ -16,7 +16,7 @@ function DebtList() {
                     const data = await getOrganizations();
                     setOrganizations(data);
                 } catch {
-                    console.log("Error");
+                    console.log("Error fetching organizations.");
                 }
             }
             fetchOrganizations();
@@ -24,8 +24,8 @@ function DebtList() {
 
     const navigate = useNavigate();
 
-    const addDebt = () => {
-        navigate('/debt/add');
+    const addDebt = (id: number) => {
+        navigate(`/debt/add/${id}`);
     }
 
     return (
@@ -35,7 +35,7 @@ function DebtList() {
                     <Box key={o.id}>
                         <Box sx={{display: 'flex', gap: 2, pb: 2}}>
                             <Typography variant='h4'> {o.name} </Typography>
-                            <Button onClick={addDebt}>Add</Button>
+                            <Button onClick={() => addDebt(o.id)}>Add</Button>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
                             {o.debts.map(d => (

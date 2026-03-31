@@ -3,7 +3,8 @@ export type Debt = {
     name: string,
     principal_amt: number,
     status: "active" | "paid",
-    issue_date: string
+    issue_date: string,
+    organization_id: number
 }
 
 export type Organization = {
