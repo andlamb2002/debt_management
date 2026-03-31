@@ -12,7 +12,7 @@ function DebtCard({ debt }: Props) {
     const navigate = useNavigate();
 
     const debtDetails = () => {
-        navigate('/debt/1')
+        navigate(`/debt/${debt.id}`)
     }
 
     return (

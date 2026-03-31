@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
 
-function Payment() {
+function PaymentCard() {
     return (
         <Box sx={{display: "flex", gap: 2}}>
             <Typography variant="h6">Payment Amt</Typography>
@@ -9,4 +9,4 @@ function Payment() {
     )
 }
 
-export default Payment
+export default PaymentCard

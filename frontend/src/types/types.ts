@@ -1,3 +1,10 @@
+export type Payment = {
+    id: number,
+    amount: number,
+    date_paid: string,
+    debt_id: number
+}
+
 export type Debt = {
     id: number,
     name: string,

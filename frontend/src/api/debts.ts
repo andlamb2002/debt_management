@@ -7,3 +7,9 @@ export const addDebt = async (data: { name: string; principal_amt: number; issue
     const response = await client.post(url, { debt: data });
     return response.data;
 }
+
+export const getDebt = async (id: number) => {
+    const url = `${path}`;
+    const response = await client.get(`${url}/${id}`);
+    return response.data;
+}

@@ -1,31 +1,64 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import Payment from "../components/Payment";
+
+import { getDebt } from "../api/debts";
+import { Box, Button, TextField, Typography } from "@mui/material"
+import PaymentCard from "../components/PaymentCard";
+import type { Debt, Payment } from "../types/types";
+
+type DebtInfo = Debt & {
+    total_paid: number,
+    remaining_balance: number,
+    payments: Payment[]
+}
 
 function DebtDetails() {
 
     const { id } = useParams()
+
+    const [debt, setDebt] = useState<DebtInfo | null>(null);
+
+    useEffect(() => {
+        const fetchDebt = async () => {
+            try {
+                const data = await getDebt(Number(id));
+                setDebt(data);
+            } catch {
+                console.log("Error fetching debt.");
+            }
+        }
+        fetchDebt();
+    }, [id])
+
     const navigate = useNavigate();
     
     const handleSubmit = () => {
         navigate("/");
     }
 
+    if (!debt) {
+        return (
+            <Typography variant="h6">
+                Loading
+            </Typography>
+        );
+    }
+
     return (
         <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
             <Box>
-                <Typography variant="h6">Name {id}</Typography>
-                <Typography variant="h6">Date</Typography>
-                <Typography variant="h6">Status</Typography>
-                <Typography variant="h6">Amt</Typography>
-                <Typography variant="h6">Paid</Typography>
-                <Typography variant="h6">Amt Left</Typography>
+                <Typography variant="h6">{debt.name}</Typography>
+                <Typography variant="h6">{debt.issue_date}</Typography>
+                <Typography variant="h6">{debt.status}</Typography>
+                <Typography variant="h6">{debt.principal_amt}</Typography>
+                <Typography variant="h6">{debt.total_paid}</Typography>
+                <Typography variant="h6">{debt.remaining_balance}</Typography>
             </Box>
             <Box>
-                <Typography variant="h4">Payments</Typography>
-                <Payment/>
-                <Payment/>
-                <Payment/>
+                <Typography variant="h5">Payments</Typography>
+                <PaymentCard/>
+                <PaymentCard/>
+                <PaymentCard/>
             </Box>
             <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
                 <TextField
