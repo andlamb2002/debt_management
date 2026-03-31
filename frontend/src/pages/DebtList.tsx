@@ -28,7 +28,7 @@ function DebtList() {
         navigate(`/debt/add/${id}`);
     }
 
-    if (!organizations) {
+    if (organizations.length === 0) {
         return (
             <Typography variant="h6">
                 Loading
