@@ -15,9 +15,9 @@ class DebtsController < ApplicationController
 
   # GET /debts/1
   def show
-    render json: @debt.as_json.merge(
+    render json: @debt.as_json(include: :payments).merge(
       total_paid: @debt.total_paid,
-      remaining_balance: @debt.remaining_balance
+      remaining_balance: @debt.remaining_balance,
     )
   end
 
