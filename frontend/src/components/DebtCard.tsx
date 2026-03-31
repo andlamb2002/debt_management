@@ -17,7 +17,7 @@ function DebtCard({ debt }: Props) {
 
     return (
         <Card 
-            sx={{display: "flex", p: 2, gap: 2, cursor: "pointer"}}
+            sx={{display: "flex", width: 600, p: 2, gap: 2, cursor: "pointer"}}
             onClick={debtDetails}
         >
             <Typography variant='h6'> {debt.name} </Typography>

@@ -33,8 +33,9 @@ function AddDebt() {
     }
 
     return (
-        <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
+        <Box sx={{display: "flex", flexDirection: "column", width: 600, gap: 2}}>
             <Button
+                sx={{width: 200}}
                 onClick={() => navigate(-1)}
             >
                 Back
