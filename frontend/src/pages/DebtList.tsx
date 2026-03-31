@@ -28,6 +28,14 @@ function DebtList() {
         navigate(`/debt/add/${id}`);
     }
 
+    if (!organizations) {
+        return (
+            <Typography variant="h6">
+                Loading
+            </Typography>
+        );
+    }
+
     return (
         <>
             <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, pb: 4}}>
