@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 
 import { deleteDebt, getDebt } from "../api/debts";
-import { addPayment } from "../api/payments";
+import { addPayment, deletePayment } from "../api/payments";
 import { Box, Button, TextField, Typography } from "@mui/material"
 import PaymentCard from "../components/PaymentCard";
 import type { Debt, Payment } from "../types/types";
@@ -47,6 +47,15 @@ function DebtDetails() {
         }
     }
     
+    const handleDeletePayment = async (id: number) => {
+        try {
+            await deletePayment(id);
+            setRefreshKey(prev => prev + 1);
+        } catch {
+            console.log("Error deleting payment.");
+        }
+    }
+
     const handleSubmit = async () => {
         try {
             const payment = {
@@ -96,6 +105,7 @@ function DebtDetails() {
                     <PaymentCard
                         key={p.id}
                         payment={p}
+                        handleDeletePayment={handleDeletePayment}
                     />
                 ))}
             </Box>
