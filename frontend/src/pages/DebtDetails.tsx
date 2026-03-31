@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 
-import { getDebt } from "../api/debts";
+import { deleteDebt, getDebt } from "../api/debts";
 import { addPayment } from "../api/payments";
 import { Box, Button, TextField, Typography } from "@mui/material"
 import PaymentCard from "../components/PaymentCard";
@@ -37,6 +37,15 @@ function DebtDetails() {
         }
         fetchDebt();
     }, [id, refreshKey])
+
+    const handleDelete = async () => {
+        try {
+            await deleteDebt(Number(id));
+            navigate("/");
+        } catch {
+            console.log("Error deleting debt.");
+        }
+    }
     
     const handleSubmit = async () => {
         try {
@@ -75,6 +84,11 @@ function DebtDetails() {
                 <Typography variant="h6">{debt.principal_amt}</Typography>
                 <Typography variant="h6">{debt.total_paid}</Typography>
                 <Typography variant="h6">{debt.remaining_balance}</Typography>
+                <Button
+                    onClick={handleDelete}
+                >
+                    Delete
+                </Button>
             </Box>
             <Box>
                 <Typography variant="h5">Payments</Typography>

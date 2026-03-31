@@ -13,3 +13,9 @@ export const getDebt = async (id: number) => {
     const response = await client.get(`${url}/${id}`);
     return response.data;
 }
+
+export const deleteDebt = async (id: number) => {
+    const url = `${path}`;
+    const response = await client.delete(`${url}/${id}`);
+    return response.data;
+}
