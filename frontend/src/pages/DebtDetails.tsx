@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { getDebt } from "../api/debts";
 import { addPayment } from "../api/payments";
@@ -23,6 +23,8 @@ function DebtDetails() {
     const [date, setDate] = useState<string>("");
 
     const [refreshKey, setRefreshKey] = useState(0)
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDebt = async () => {
@@ -60,6 +62,11 @@ function DebtDetails() {
 
     return (
         <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
+            <Button
+                onClick={() => navigate(-1)}
+            >
+                Back
+            </Button>
             <Box>
                 <Typography variant="h6">{debt.name}</Typography>
                 <Typography variant="h6">{debt.issue_date}</Typography>

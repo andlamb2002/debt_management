@@ -34,6 +34,11 @@ function AddDebt() {
 
     return (
         <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
+            <Button
+                onClick={() => navigate(-1)}
+            >
+                Back
+            </Button>
             <TextField
                 label="Name"
                 value={name}
