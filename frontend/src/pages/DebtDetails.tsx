@@ -56,9 +56,11 @@ function DebtDetails() {
             </Box>
             <Box>
                 <Typography variant="h5">Payments</Typography>
-                <PaymentCard/>
-                <PaymentCard/>
-                <PaymentCard/>
+                {debt.payments.map(p => (
+                    <PaymentCard
+                        payment={p}
+                    />
+                ))}
             </Box>
             <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
                 <TextField
