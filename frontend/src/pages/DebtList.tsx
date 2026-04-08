@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, MenuItem, Select, Typography } from '@mui/material'
 import DebtCard from '../components/DebtCard'
 import { useNavigate } from 'react-router-dom'
 
 import type { Organization } from '../types/types'
 import { getOrganizations } from '../api/organizations'
+
+const options = ["all", "active", "paid"];
 
 function DebtList() {
 
@@ -21,6 +23,8 @@ function DebtList() {
             }
             fetchOrganizations();
         }, [])
+
+    const [selectedOption, setSelectedOption] = useState<string>(options[0]);
 
     const navigate = useNavigate();
 
@@ -39,6 +43,20 @@ function DebtList() {
     return (
         <>
             <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, pb: 4}}>
+                <Select
+                    defaultValue={options[0]}
+                    sx={{width: 200}}
+                >
+                    {options.map(o => (
+                        <MenuItem 
+                            key={o} 
+                            value={o}
+                            onClick={() => setSelectedOption(o)}
+                        >
+                            {o}
+                        </MenuItem>
+                    ))}
+                </Select>
                 {organizations.map(o => (
                     <Box key={o.id}>
                         <Box sx={{display: 'flex', gap: 2, pb: 2}}>
@@ -46,7 +64,10 @@ function DebtList() {
                             <Button onClick={() => addDebt(o.id)}>Add</Button>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-                            {o.debts.map(d => (
+                            {o.debts.filter(d => {
+                                if(selectedOption === "all") return true;
+                                return selectedOption === d.status;
+                            }).map(d => (
                                 <DebtCard 
                                     key={d.id}
                                     debt={d}
