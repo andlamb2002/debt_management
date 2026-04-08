@@ -3,7 +3,7 @@ class Debt < ApplicationRecord
     belongs_to :organization
 
     validates :name, presence: true
-    validates :principal_amt, presence: true
+    validates :principal_amt, presence: true, numericality: { greater_than: 0 }
     validates :issue_date, presence: true
     validates :status, inclusion: { in: ["active", "paid"] }
 
